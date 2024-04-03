@@ -1,0 +1,62 @@
+﻿@page
+@model WebApp.Pages.Artists.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label asp-for="CreateArtistViewmodel.Name" class="control-label"></label>
+                        <input asp-for="CreateArtistViewmodel.Name" class="form-control" />
+                        <span asp-validation-for="CreateArtistViewmodel.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="CreateArtistViewmodel.DateOfBirth" class="control-label"></label>
+                        <input asp-for="CreateArtistViewmodel.DateOfBirth" class="form-control" />
+                        <span asp-validation-for="CreateArtistViewmodel.DateOfBirth" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="CreateArtistViewmodel.Age" class="control-label"></label>
+                        <input asp-for="CreateArtistViewmodel.Age" class="form-control" />
+                        <span asp-validation-for="CreateArtistViewmodel.Age" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="CreateArtistViewmodel.DebutYear" class="control-label"></label>
+                        <input asp-for="CreateArtistViewmodel.DebutYear" class="form-control" />
+                        <span asp-validation-for="CreateArtistViewmodel.DebutYear" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="CreateArtistViewmodel.Genre" class="control-label"></label>
+                        <input asp-for="CreateArtistViewmodel.Genre" class="form-control" />
+                        <span asp-validation-for="CreateArtistViewmodel.Genre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="CreateArtistViewmodel.Label" class="control-label"></label>
+                        <input asp-for="CreateArtistViewmodel.Label" class="form-control" />
+                        <span asp-validation-for="CreateArtistViewmodel.Label" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="CreateArtistViewmodel.DisplayImageUrl" class="control-label"></label>
+                        <input asp-for="CreateArtistViewmodel.DisplayImageFile" class="form-control file-input" />
+                        <input type="hidden" asp-for="CreateArtistViewmodel.DisplayImageUrl" class="form-control" />
+                        <span asp-validation-for="CreateArtistViewmodel.DisplayImageUrl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group my-4 d-flex align-items-center gap-2">
+                        <input type="submit" value="Create" class="btn btn-primary w-100" />
+                        <a asp-page="Index" class="btn btn-outline-primary w-100">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

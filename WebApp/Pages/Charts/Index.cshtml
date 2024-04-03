@@ -1,0 +1,45 @@
+﻿@page
+
+@model WebApp.Pages.Charts.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Charts</h1>
+            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+            <a asp-page="Create" class="btn btn-outline-primary">Create chart</a>
+        </div>
+    </div>
+</section>
+
+<div class="py-5 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach (WebApp.ViewModels.ChartListViewModel chart in Model.ChartListViewModel)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="~/images/@chart.DisplayImageUrl" class="card-img-top img-fluid card-image" height="225">
+                        <div class="card-body">
+                            <div class="my-2">
+                                <i class="badge bg-primary">Year <em>@chart.Year</em></i>
+                                <i class="badge bg-primary">Month <em>@chart.Month</em></i>
+                                <i class="badge bg-primary">Week <em>@chart.Week</em></i>
+                            </div>
+                            <h2 class="h5">@chart.Title</h2>
+                            <p class="card-text">@chart.Description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a asp-page="Details" asp-route-ID="@chart.Id" class="btn btn-link">View</a>
+                                <small class="text-muted">Created by <em>@chart.CreatedBy</em></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

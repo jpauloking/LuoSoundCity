@@ -1,0 +1,71 @@
+﻿@page "{id:int:min(1)}"
+@model WebApp.Pages.Artists.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    string placeholderImageFileName = "no_image.png";
+}
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-8">
+                    <form method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input asp-for="ArtistEditViewModel.Id" type="hidden" class="form-control" />
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label asp-for="ArtistEditViewModel.Name" class="control-label"></label>
+                                <input asp-for="ArtistEditViewModel.Name" class="form-control" />
+                                <span asp-validation-for="ArtistEditViewModel.Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label asp-for="ArtistEditViewModel.DateOfBirth" class="control-label"></label>
+                                <input asp-for="ArtistEditViewModel.DateOfBirth" class="form-control" />
+                                <span asp-validation-for="ArtistEditViewModel.DateOfBirth" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="ArtistEditViewModel.Age" class="control-label"></label>
+                                <input asp-for="ArtistEditViewModel.Age" class="form-control" />
+                                <span asp-validation-for="ArtistEditViewModel.Age" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="ArtistEditViewModel.DebutYear" class="control-label"></label>
+                                <input asp-for="ArtistEditViewModel.DebutYear" class="form-control" />
+                                <span asp-validation-for="ArtistEditViewModel.DebutYear" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="ArtistEditViewModel.Genre" class="control-label"></label>
+                                <input asp-for="ArtistEditViewModel.Genre" class="form-control" />
+                                <span asp-validation-for="ArtistEditViewModel.Genre" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="ArtistEditViewModel.Label" class="control-label"></label>
+                                <input asp-for="ArtistEditViewModel.Label" class="form-control" />
+                                <span asp-validation-for="ArtistEditViewModel.Label" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label asp-for="ArtistEditViewModel.DisplayImageUrl" class="control-label"></label>
+                                <input asp-for="ArtistEditViewModel.DisplayImageFile" class="form-control file-input" />
+                                <input type="hidden" asp-for="ArtistEditViewModel.DisplayImageUrl" class="form-control" />
+                                <span asp-validation-for="ArtistEditViewModel.DisplayImageUrl" class="text-danger"></span>
+                            </div>
+                            <div class="form-group my-4 d-flex align-items-center gap-2">
+                                <input type="submit" value="Update" class="btn btn-primary w-100" />
+                                <a asp-page="Details" asp-route-ID="@Model.ArtistEditViewModel.Id" class="btn btn-outline-primary w-100">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <img asp-append-version="true" src="~/images/@(Model.ArtistEditViewModel.DisplayImageUrl ?? placeholderImageFileName)" alt="artist name" class="img-fluid img-thumbnail" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

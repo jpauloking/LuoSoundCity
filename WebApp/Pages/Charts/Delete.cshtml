@@ -1,0 +1,33 @@
+﻿@page "{id:int:min(1)}"
+@model WebApp.Pages.Charts.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-6">Delete</h1>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title fs-4">Delete chart @Model.ChartDeleteViewModel.Title</h1>
+                    <div class="py-2">
+                        <i class="badge bg-primary">Year <em>@Model.ChartDeleteViewModel.Year</em></i>
+                        <i class="badge bg-primary">Month <em>@Model.ChartDeleteViewModel.Month</em></i>
+                        <i class="badge bg-primary">Week <em>@Model.ChartDeleteViewModel.Week</em></i>
+                    </div>
+                    <form method="post">
+                        <input type="hidden" asp-for="ChartDeleteViewModel.Id" />
+                        <div class="form-group my-2 d-flex align-items-center gap-2">
+                            <input type="submit" value="Delete" class="btn btn-outline-danger w-100" />
+                            <a asp-page="Details" asp-route-ID="@Model.ChartDeleteViewModel.Id" class="btn btn-outline-primary w-100">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

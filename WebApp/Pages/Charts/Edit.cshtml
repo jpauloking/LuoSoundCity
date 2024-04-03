@@ -1,0 +1,155 @@
+﻿@page "{id:int:min(1)}"
+@using WebApp.Models
+@model WebApp.Pages.Charts.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    string placeholderImageFileName = "no_image.png";
+    bool chartHasSongs = (Model.ChartEditViewModel.Songs is not null && Model.ChartEditViewModel.Songs.Count > 0);
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <form method="post" enctype="multipart/form-data">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="ChartEditViewModel.Id" class="form-control" />
+                                    <input type="hidden" asp-for="ChartEditViewModel.CreatedBy" value="Black boy" class="form-control" />
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label asp-for="ChartEditViewModel.Title" class="control-label"></label>
+                                            <input asp-for="ChartEditViewModel.Title" class="form-control" />
+                                            <span asp-validation-for="ChartEditViewModel.Title" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <label asp-for="ChartEditViewModel.Description" class="control-label"></label>
+                                            <textarea asp-for="ChartEditViewModel.Description" class="form-control"></textarea>
+                                            <span asp-validation-for="ChartEditViewModel.Description" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label asp-for="ChartEditViewModel.Year" class="control-label"></label>
+                                            <input asp-for="ChartEditViewModel.Year" class="form-control" min="1900" />
+                                            <span asp-validation-for="ChartEditViewModel.Year" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label asp-for="ChartEditViewModel.Month" class="control-label"></label>
+                                            <input asp-for="ChartEditViewModel.Month" class="form-control" min="1" max="12" />
+                                            <span asp-validation-for="ChartEditViewModel.Month" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label asp-for="ChartEditViewModel.Week" class="control-label"></label>
+                                            <input asp-for="ChartEditViewModel.Week" class="form-control" min="1" max="53" />
+                                            <span asp-validation-for="ChartEditViewModel.Week" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <label asp-for="ChartEditViewModel.DisplayImageUrl" class="control-label"></label>
+                                            <input asp-for="ChartEditViewModel.DisplayImageFile" class="form-control file-input" />
+                                            <input type="hidden" asp-for="ChartEditViewModel.DisplayImageUrl" class="form-control" />
+                                            <span asp-validation-for="ChartEditViewModel.DisplayImageUrl" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group my-4 d-flex align-items-center gap-2">
+                                            <input type="submit" value="Update" class="btn btn-primary w-100" />
+                                            @if (chartHasSongs)
+                                            {
+                                                <button class="btn btn-outline-primary  w-100">Re-arrange songs</button>
+                                            }
+                                            <a asp-page="Details" asp-route-ID="@Model.ChartEditViewModel.Id" class="btn btn-outline-primary w-100">Cancel</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-4">
+                                <img asp-append-version="true" src="~/images/@(Model.ChartEditViewModel.DisplayImageUrl ?? placeholderImageFileName)" alt="artist name" class="img-fluid img-thumbnail" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <form method="post" asp-page-handler="AddSongsToChart">
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label asp-for="@Model.SongsSelectList">Add a song to chart</label>
+                            <select asp-for="@Model.SelectedSongId" asp-items="@Model.SongsSelectList" class="form-select">
+                                <option value="-1">Select a song</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label asp-for="ChartSongCreateViewModel.Position" class="control-label"></label>
+                            <input asp-for="ChartSongCreateViewModel.Position" class="form-control" min="1" />
+                            <span asp-validation-for="ChartSongCreateViewModel.Position" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label asp-for="ChartSongCreateViewModel.PreviousPosition" class="control-label"></label>
+                            <input asp-for="ChartSongCreateViewModel.PreviousPosition" class="form-control" min="0" />
+                            <span asp-validation-for="ChartSongCreateViewModel.PreviousPosition" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label asp-for="ChartSongCreateViewModel.NumberOfWeeksAtPosition" class="control-label"></label>
+                            <input asp-for="ChartSongCreateViewModel.NumberOfWeeksAtPosition" class="form-control" min="0" />
+                            <span asp-validation-for="ChartSongCreateViewModel.NumberOfWeeksAtPosition" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label asp-for="ChartSongCreateViewModel.NumberOfWeeksOnChart" class="control-label"></label>
+                            <input asp-for="ChartSongCreateViewModel.NumberOfWeeksOnChart" class="form-control" min="0" />
+                            <span asp-validation-for="ChartSongCreateViewModel.NumberOfWeeksOnChart" class="text-danger"></span>
+                        </div>
+                        <div class="form-group my-4 d-flex align-items-center gap-2">
+                            <input type="submit" value="Update songs in chart" class="btn btn-outline-primary w-100" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                @if (chartHasSongs)
+            {
+                <div class="col-12 d-flex justify-content-between align-items-end">
+                    <h2 class="h5">Songs</h2>
+                    <a asp-page="/Songs/Create" asp-route-ChartId="@Model.ChartEditViewModel.Id" class="btn btn-link">Re-arrange songs</a>
+                </div>
+                <div class="col">
+                    <table class="table table-striped table-borderless table-hover">
+                        <thead>
+                            <tr>
+                                <th>Track</th>
+                                <th>Title</th>
+                                <th>Genre</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Song song in (Model.ChartEditViewModel?.Songs)!)
+                            {
+                                <tr>
+                                    <td># @(song.Id)</td>
+                                    <td>@song.Title</td>
+                                    <td>@song.Genre</td>
+                                    <td><button class="btn btn-sm btn-link">move up</button></td>
+                                    <td><button class="btn btn-sm btn-link">move down</button></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

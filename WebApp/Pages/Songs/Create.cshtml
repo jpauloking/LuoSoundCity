@@ -1,0 +1,64 @@
+﻿@page
+@model WebApp.Pages.Songs.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="SongCreateViewModel.Artist" class="control-label"></label>
+                        <select asp-for="SongCreateViewModel.ArtistId" asp-items="@Model.Artists" class="form-control form-select" >
+                            <option value="-1">Select an artist</option>
+                        </select>
+                        <span asp-validation-for="SongCreateViewModel.Artist" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-end">
+                        <a asp-page="/Artists/Create" asp-route-ReturnURL="/Songs/Create" class="btn btn-link">Create New Artist</a>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="SongCreateViewModel.Title" class="control-label"></label>
+                        <input asp-for="SongCreateViewModel.Title" class="form-control" />
+                        <span asp-validation-for="SongCreateViewModel.Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="SongCreateViewModel.Genre" class="control-label"></label>
+                        <input asp-for="SongCreateViewModel.Genre" class="form-control" />
+                        <span asp-validation-for="SongCreateViewModel.Genre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="SongCreateViewModel.AudioFileUrl" class="control-label"></label>
+                        <input asp-for="SongCreateViewModel.AudioFile" class="form-control" />
+                        <input type="hidden" asp-for="SongCreateViewModel.AudioFileUrl" class="form-control" />
+                        <span asp-validation-for="SongCreateViewModel.AudioFileUrl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="SongCreateViewModel.ClipArtUrl" class="control-label"></label>
+                        <input asp-for="SongCreateViewModel.ClipArt" class="form-control form-file" />
+                        <input type="hidden" asp-for="SongCreateViewModel.ClipArtUrl" class="form-control" />
+                        <span asp-validation-for="SongCreateViewModel.ClipArtUrl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="SongCreateViewModel.ReleaseDate" class="control-label"></label>
+                        <input asp-for="SongCreateViewModel.ReleaseDate" class="form-control" />
+                        <span asp-validation-for="SongCreateViewModel.ReleaseDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group my-4 d-flex align-items-center gap-2">
+                        <input type="submit" value="Create" class="btn btn-primary w-100" />
+                        <a asp-page="Index" class="btn btn-outline-primary w-100">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
